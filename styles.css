@@ -6,7 +6,7 @@ body, input {
 }
 
 p {
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 
 .terminal-history > p:nth-child(1){
