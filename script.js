@@ -22,20 +22,30 @@ document.getElementById("terminalInput").onkeydown = function(){
                      </br>
                      <li>USAGE EXAMPLES</li>
                      </br>
-                     <li class="ml-2">clim8</li>
+                     <li class="ml-2">clim8 [command]</li>
+                     </br>
+                     <li>COMMANDS</li>
+                     </br>
+                     <li class="ml-2">deliver<span class="ml-5"></span>Delivers a message input by the user</li>
                      </ul>
                      `;
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = greeting;
         }
 
-        else if(commandEntered === 'bananas') {
-          console.log('bananas')
+        else if(commandEntered === 'clim8 deliver') {
+          let runNoFlags = `
+                     <ul>
+                     <li>Incorrect usage: The deliver command requires a message. Type the message in single quotes following the deliver command.</li>
+                     <li>FAILED</li>
+                     </ul>
+                     `;
+          document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
+          terminalResponseContainer.innerHTML = runNoFlags;
         }
 
         // user enters 'clim8 run' and sees a running message 
         // followed by a failure due to missing flags
-        // for some reason adding another condition prints BOTH if and else cases
 
         else {
 
