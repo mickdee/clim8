@@ -16,8 +16,14 @@ document.getElementById("terminalInput").onkeydown = function(){
         // user enters 'clim8' and sees greeting / introductory overview
         if(commandEntered === 'clim8') {
           let greeting = `
-                     <p>Welcome to clim8!</p>
-                     <p>The CLI prototyping tool.</p>
+                     <ul>
+                     <li>Welcome to clim8 the CLI prototyping tool!</li>
+                     <li>version: 0.1</li>
+                     </br>
+                     <li>USAGE EXAMPLES</li>
+                     </br>
+                     <li class="ml-2">clim8</li>
+                     </ul>
                      `;
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = greeting;

@@ -5,8 +5,13 @@ body, input {
   font-size: 14px;
 }
 
-p {
+p,ul {
   margin-bottom: 10px;
+  padding-left: 0px;
+}
+
+li {
+  list-style-type: none;
 }
 
 .terminal-history > p:nth-child(1){
@@ -43,4 +48,12 @@ input {
 
 input:focus {
   outline: none;
+}
+
+.ml-1 {
+  margin-left: 8px;
+}
+
+.ml-2 {
+  margin-left: 16px;
 }
