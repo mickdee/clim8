@@ -59,3 +59,9 @@ onkeydown = onkeyup = function(e){
         document.getElementById("terminalHistory").innerHTML = "";
     };
 };
+
+// click anywhere to re-focus the terminal input
+document.body.addEventListener('click', focusTerminal); 
+function focusTerminal() {
+  document.getElementById("terminalInput").focus();;
+}
