@@ -1,0 +1,46 @@
+body, input {
+  background-color: black;
+  color: white;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+p {
+  margin-bottom: 7px;
+}
+
+.terminal-history > p:nth-child(1){
+  padding-top: 4px;
+}
+
+.input-container {
+ display: flex;
+ align-items: center;
+}
+
+.input-container__cursor {
+  color: green;
+  width: 190px;
+  min-width: 190px;
+  display: flex;
+}
+
+.cursor--location {
+  color: white;
+  padding-right: 8px;
+}
+
+.input-container__input-field {
+  width: 100%;
+}
+
+input {
+  color: white;
+  height: 24px;
+  border: none;
+  width: 100%;
+}
+
+input:focus {
+  outline: none;
+}
