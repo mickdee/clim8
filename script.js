@@ -63,14 +63,16 @@ document.getElementById("terminalInput").onkeydown = function(){
         }
 
         // user sees help for 'clim8 deliver' command
-        else if(commandEntered === 'clim8 deliver -h' || 'clim8 deliver --help') {
+        else if((commandEntered === 'clim8 deliver -h') || (commandEntered === 'clim8 deliver --help')) {
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = deliverHelp;
         }
 
         // GIVEN user wants to run the deliver command
         // WHEN user enters clim8 deliver with all flags 
-        // THEN user sees 'deliverning...' moutput
+        // THEN user sees 'deliverning...' output
+        // THEN user waits a few seconds
+        // THEN user sees 'SUCCESS!' output
 
         else {
           // user enters a command not understood by clim8
