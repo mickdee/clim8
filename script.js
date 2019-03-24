@@ -121,9 +121,12 @@ let map = {};
 onkeydown = onkeyup = function(e){
     e = e || event; 
     map[e.keyCode] = e.type == 'keydown';
-    // user clears the terminal with CMD + k
+    // user clears the terminal with CMD + k or CTRL + K
     if(map[91] && map[75]){ // CMD+K
-        document.getElementById("terminalHistory").innerHTML = "";
+      document.getElementById("terminalHistory").innerHTML = "";
+    }
+    else if (map[17] && map[75]) { // CTRL + K
+      document.getElementById("terminalHistory").innerHTML = "";
     };
     // user presses up arrow key to print previous command
     if(map[38]){
