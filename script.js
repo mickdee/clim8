@@ -4,7 +4,7 @@ document.getElementById("terminalInput").onkeydown = function(){
   if(event.keyCode === 13) {
         
         // capture the command the user entered and create a container for the response
-        let commandEntered = this.value;
+        commandEntered = this.value;
         let terminalResponseContainer = document.createElement("div");
         
         // echo back what the user typed each time the enter a command
@@ -12,10 +12,8 @@ document.getElementById("terminalInput").onkeydown = function(){
         let echoInputLine = document.createTextNode('User-MachineName ~ ⚬→ ' + this.value);
         document.getElementById("terminalHistory").appendChild(echoInputContainer);
         echoInputContainer.appendChild(echoInputLine);
-        
-        // user enters 'clim8' and sees greeting / introductory overview
-        if(commandEntered === 'clim8') {
-          let greeting = `
+
+        let greeting = `
                      <ul>
                      <li>Welcome to clim8 the CLI prototyping tool!</li>
                      <li>version: 0.1</li>
@@ -26,29 +24,55 @@ document.getElementById("terminalInput").onkeydown = function(){
                      </br>
                      <li>COMMANDS</li>
                      </br>
-                     <li class="ml-2">deliver<span class="ml-5"></span>Delivers a message input by the user</li>
+                     <li class="ml-2 multispace-output-text">deliver      delivers a message input by the user</li>
                      </ul>
                      `;
+        let deliverFailed = `
+                     <ul>
+                     <li>FAILED</li>
+                     </br>
+                     <li>Incorrect usage: The deliver command requires a message. Type the message in single quotes following the deliver command.</li>
+                     </ul>
+                     `;
+        let deliverHelp = `
+                     <ul>
+                     <li>COMMAND NAME</li>
+                     </br>
+                     <li class="ml-2 multispace-output-text">deliver      delivers a message input by the user</li>
+                     </br>
+                     <li>USAGE EXAMPLES</li>
+                     </br>
+                     <li class="ml-2">clim8 deliver -m 'your message'</li>
+                     </br>
+                     <li>FLAGS</li>
+                     </br>
+                     <li class="ml-2 multispace-output-text">-m      Message to be delivered (example 'this is my message')</li>
+                     </ul>
+                     `;
+
+        // user enters 'clim8' and sees greeting / introductory overview
+        if(commandEntered === 'clim8') {
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = greeting;
         }
 
+        // user runs 'clim8 deliver without all requirements'
         else if(commandEntered === 'clim8 deliver') {
-          let runNoFlags = `
-                     <ul>
-                     <li>Incorrect usage: The deliver command requires a message. Type the message in single quotes following the deliver command.</li>
-                     <li>FAILED</li>
-                     </ul>
-                     `;
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
-          terminalResponseContainer.innerHTML = runNoFlags;
+          terminalResponseContainer.innerHTML = deliverFailed + deliverHelp;
         }
 
-        // user enters 'clim8 run' and sees a running message 
-        // followed by a failure due to missing flags
+        // user sees help for 'clim8 deliver' command
+        else if(commandEntered === 'clim8 deliver -h' || 'clim8 deliver --help') {
+          document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
+          terminalResponseContainer.innerHTML = deliverHelp;
+        }
+
+        // GIVEN user wants to run the deliver command
+        // WHEN user enters clim8 deliver with all flags 
+        // THEN user sees 'deliverning...' moutput
 
         else {
-
           // user enters a command not understood by clim8
           let commandNotFoundContainer = document.createElement("p");
           let commandNotFoundText = document.createTextNode(this.value + ': command not found');
@@ -63,21 +87,28 @@ document.getElementById("terminalInput").onkeydown = function(){
 
         // page always stays scrolled to bottom to mimick a terminal window
         window.scrollTo(0,document.body.scrollHeight);
+
+        return(commandEntered);
   };
 };
 
-// user clears the terminal with CMD + k
+
 let map = {}; 
 onkeydown = onkeyup = function(e){
     e = e || event; 
     map[e.keyCode] = e.type == 'keydown';
+    // user clears the terminal with CMD + k
     if(map[91] && map[75]){ // CMD+K
         document.getElementById("terminalHistory").innerHTML = "";
     };
+    // user presses up arrow key to print previous command
+    if(map[38]){
+      document.getElementById('terminalInput').value = commandEntered
+    }
 };
 
 // click anywhere to re-focus the terminal input
 document.body.addEventListener('click', focusTerminal); 
 function focusTerminal() {
-  document.getElementById("terminalInput").focus();;
-}
+  document.getElementById("terminalInput").focus();
+};

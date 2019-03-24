@@ -50,6 +50,10 @@ input:focus {
   outline: none;
 }
 
+.multispace-output-text {
+  white-space:pre-wrap;
+}
+
 .ml-1 {
   margin-left: 8px;
 }
