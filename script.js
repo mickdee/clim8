@@ -122,7 +122,7 @@ onkeydown = onkeyup = function(e){
     e = e || event; 
     map[e.keyCode] = e.type == 'keydown';
     // user clears the terminal with CMD + k or CTRL + K
-    if(map[91] && map[75]){ // CMD+K
+    if((map[91] && map[75])){ // CMD+K
       document.getElementById("terminalHistory").innerHTML = "";
     }
     else if (map[17] && map[75]) { // CTRL + K
