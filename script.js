@@ -2,7 +2,7 @@ document.getElementById("terminalInput").onkeydown = function(){
   
   // user enters a command
   if(event.keyCode === 13) {
-        
+
         // capture the command the user entered and create a container for the response
         commandEntered = this.value;
         let terminalResponseContainer = document.createElement("div");
@@ -12,6 +12,9 @@ document.getElementById("terminalInput").onkeydown = function(){
         let echoInputLine = document.createTextNode('User-MachineName ~ ⚬→ ' + this.value);
         document.getElementById("terminalHistory").appendChild(echoInputContainer);
         echoInputContainer.appendChild(echoInputLine);
+
+        // print feedback while the terminal is running a command
+        let terminalRunningMessageContainer = document.createElement("div");
 
         let greeting = `
                      <ul>
@@ -24,7 +27,7 @@ document.getElementById("terminalInput").onkeydown = function(){
                      </br>
                      <li>COMMANDS</li>
                      </br>
-                     <li class="ml-2 multispace-output-text">deliver      delivers a message input by the user</li>
+                     <li class="ml-2 line-multispace">deliver      delivers a message input by the user</li>
                      </ul>
                      `;
         let deliverFailed = `
@@ -38,7 +41,7 @@ document.getElementById("terminalInput").onkeydown = function(){
                      <ul>
                      <li>COMMAND NAME</li>
                      </br>
-                     <li class="ml-2 multispace-output-text">deliver      delivers a message input by the user</li>
+                     <li class="ml-2 line-multispace">deliver      delivers a message input by the user</li>
                      </br>
                      <li>USAGE EXAMPLES</li>
                      </br>
@@ -46,7 +49,17 @@ document.getElementById("terminalInput").onkeydown = function(){
                      </br>
                      <li>FLAGS</li>
                      </br>
-                     <li class="ml-2 multispace-output-text">-m      Message to be delivered (example 'this is my message')</li>
+                     <li class="ml-2 line-multispace">-m      Message to be delivered (example 'this is my message')</li>
+                     </ul>
+                     `;
+        let deliverRunning = `
+                     <ul>
+                     <li>Running...</li>
+                     </ul>
+                     `;
+        let deliverSuccess = `
+                     <ul>
+                     <li>Success!</li>
                      </ul>
                      `;
 
@@ -68,11 +81,20 @@ document.getElementById("terminalInput").onkeydown = function(){
           terminalResponseContainer.innerHTML = deliverHelp;
         }
 
-        // GIVEN user wants to run the deliver command
-        // WHEN user enters clim8 deliver with all flags 
-        // THEN user sees 'deliverning...' output
-        // THEN user waits a few seconds
-        // THEN user sees 'SUCCESS!' output
+        // user enters 'clim8 deliver -m [any message]' and sees that it is running
+        else if(commandEntered.includes('clim8 deliver -m ')) {
+          document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
+          terminalResponseContainer.innerHTML = deliverRunning;
+          document.getElementById("terminalInputContainer").style.display = "none"
+          
+          // user sees success message after waiting 3 seconds
+          setTimeout(function(){
+            document.getElementById("terminalHistory").appendChild(terminalRunningMessageContainer);
+            terminalRunningMessageContainer.innerHTML = deliverSuccess;
+            document.getElementById("terminalInputContainer").style.display = "flex"
+            document.getElementById("terminalInput").focus();
+          }, 2000);
+        }
 
         else {
           // user enters a command not understood by clim8

@@ -50,7 +50,7 @@ input:focus {
   outline: none;
 }
 
-.multispace-output-text {
+.line-multispace {
   white-space:pre-wrap;
 }
 
