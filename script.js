@@ -64,7 +64,7 @@ document.getElementById("terminalInput").onkeydown = function(){
                      `;
 
         // user enters 'clim8' and sees greeting / introductory overview
-        if(commandEntered === 'clim8') {
+        if((commandEntered === 'clim8') || (commandEntered === 'clim8 -h') || (commandEntered === 'clim8 --help')) {
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = greeting;
         }
