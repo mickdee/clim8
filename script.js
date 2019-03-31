@@ -64,12 +64,14 @@ document.getElementById("terminalInput").onkeydown = function(){
                      `;
 
         // user enters 'clim8' and sees greeting / introductory overview
-        if((commandEntered === 'clim8') || (commandEntered === 'clim8 -h') || (commandEntered === 'clim8 --help')) {
+        if(commandEntered === 'clim8' || 
+           commandEntered === 'clim8 -h' || 
+           commandEntered === 'clim8 --help') {
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = greeting;
         }
 
-        // user runs 'clim8 deliver without all requirements'
+        // user runs 'clim8 deliver without any flags'
         else if(commandEntered === 'clim8 deliver') {
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = deliverFailed + deliverHelp;
@@ -82,7 +84,8 @@ document.getElementById("terminalInput").onkeydown = function(){
         }
 
         // user enters 'clim8 deliver -m [any message]' and sees that it is running
-        else if(commandEntered.includes('clim8 deliver -m ')) {
+        else if(commandEntered.includes('clim8 deliver') && 
+                commandEntered.includes('-m')) {
           document.getElementById("terminalHistory").appendChild(terminalResponseContainer);
           terminalResponseContainer.innerHTML = deliverRunning;
           document.getElementById("terminalInputContainer").style.display = "none"
